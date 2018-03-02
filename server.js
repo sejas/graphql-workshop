@@ -7,6 +7,8 @@ const port = process.env.PORT || 8080;
 
 const app = express();
 
+
+//Es obligatorio definir o Query, o Mutation
 const typeDefs = `
   type Query {
     sample: A
