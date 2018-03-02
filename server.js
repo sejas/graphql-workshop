@@ -7,15 +7,25 @@ const port = process.env.PORT || 8080;
 
 const app = express();
 
-const Film = //...
+const Film = new GraphQLObjectType({
+  name: 'Film',
+  description: 'A Star Wars Film',
+  fileds: {
+    title: {type: GraphQLString},
+    director: {type: GraphQLString}
+  }
+})
 
-const Character = //...
+// const Character = //...
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
     name: 'Query',
     fields: {
-
+      films: {
+        type: new GraphQLList(Film),
+        resolve: (root, args, context) => context.mongo.collection('films').find({}).toArray()
+      }
     }
   })
 });
