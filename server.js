@@ -11,17 +11,21 @@ const app = express();
 //Es obligatorio definir o Query, o Mutation
 const typeDefs = `
   type Query {
-    sample: A
+    films: [Film]
+    film(episode_id: Int!): Film
   }
 
-  type A {
-    x: String
+  type Film {
+    episode_id: Int
+    director: String
+    title: String
   }
 `;
 
 const resolvers = {
   Query: {
-    sample: (root, args, context) => ({ x: "a simpler way to define graphqQL!" })
+    films: (root, args, context) => context.mongo.collection('films').find({}).toArray(),
+    film: (root, {episode_id}, context) => context.mongo.collection('film').findOne({episode_id}),
   }
 };
 
