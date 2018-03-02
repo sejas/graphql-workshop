@@ -25,6 +25,13 @@ const schema = new GraphQLSchema({
       films: {
         type: new GraphQLList(Film),
         resolve: (root, args, context) => context.mongo.collection('films').find({}).toArray()
+      },
+      filmById: {
+        type: Film,
+        args: {
+          filmId: { type: GraphQLID}
+        },
+        resolve: (root, {filmId}, context) => context.mongo.collection('films').findOne({episode_id: filmId})
       }
     }
   })
