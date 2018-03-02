@@ -25,6 +25,8 @@ const resolvers = {
   }
 };
 
+// typeDefs: el string con las definiciones
+// resolvers: objecto con las funciones
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 const options = {
