@@ -15,7 +15,10 @@ const schema = new GraphQLSchema({
     name: 'Query',
     fields: {
       // define here a 'moto' operation which will return the moto as a string
-      mainMoto: { },
+      mainMoto: {
+        type: GraphQLString,
+        resolve: () => moto
+      },
       // define here a 'mainCharacter' operation which will return character
       mainCharacter: { }
     }
